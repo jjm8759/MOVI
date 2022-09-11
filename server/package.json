@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A context-aware movie and TV show recommendation service.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
