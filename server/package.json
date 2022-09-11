@@ -1,7 +1,7 @@
 {
   "name": "movi",
   "version": "1.0.0",
-  "description": "",
+  "description": "A context-aware movie and TV show recommendation service.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/jjm8759/MOVI.git"
   },
-  "author": "Janae Moring",
+  "author": "Janae Moring, Ryan Webb, Domenic Mangano",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jjm8759/MOVI/issues"
