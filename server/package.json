@@ -1,7 +1,7 @@
 {
   "name": "movi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Movie watchlist and recommendation webapp",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +19,20 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
+    "mongodb": "^4.9.1",
+    "connect-mongo": "^4.6.0",
     "express": "^4.18.1",
-    "mongodb": "^4.9.1"
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.4",
+    "mongoose": "^6.6.1",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.20"
   }
 }
