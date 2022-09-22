@@ -1,26 +1,15 @@
-import app from './server.js';
-import mongodb from 'mongodb';
-import dotenv from 'dotenv';
+import express from 'express'
+import cors from 'cors'
+import users from './api/users.route.js'
 
-async function main() {
-    dotenv.config();
+const app = express()
 
-    const client = new mongodb.MongoClient(
-        process.env.MOVI_DB_URI
-    );
-    const port = process.env.PORT || 8000;
+app.use(cors())
+app.use(express.json)
 
-    try {
-        // Connect to the MongoDB cluster
-        await client.connect();
+app.use("/api/v1/users", users)
+app.use('*', (req,res) => {
+    res.status(404).json({error: "not found"})
+})
 
-        app.listen(port, ()=>{
-            console.log("Server is running on port: "+port);
-        });
-    } catch(e) {
-        console.error(e);
-        process.exit(1);
-    }
-}
-
-main().catch(console.error);
+export default app
