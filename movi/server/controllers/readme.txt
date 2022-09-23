@@ -1,0 +1,1 @@
+This folder contains all the handlers (logic control) for each of the webapp's express routes.

@@ -1,0 +1,29 @@
+{
+  "name": "movi",
+  "version": "1.0.0",
+  "description": "A context-aware movie and TV show recommendation service.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjm8759/MOVI.git"
+  },
+  "author": "Janae Moring, Ryan Webb, Domenic Mangano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjm8759/MOVI/issues"
+  },
+  "homepage": "https://github.com/jjm8759/MOVI#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "moment": "^2.29.4",
+    "mongoose": "^6.6.1",
+    "nodemon": "^2.0.20"
+  }
+}
