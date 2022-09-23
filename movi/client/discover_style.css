@@ -1,0 +1,45 @@
+
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #50dcee;
+}
+
+.title-section{
+    border-radius: 25px;
+    margin: auto;
+    padding: 25px;
+    width: 50%;
+    height: 100px;
+    background-color: #d3f5fa;
+    margin-bottom: 25px;
+}
+
+.nav-bar{
+    overflow: hidden;
+    padding: 20px;
+    background-color: #d3f5fa;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #868686;
+}
+
+#nav-bar{
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    color:#868686;
+    width: 100px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#section-description{
+    border-radius: 15px;
+    padding: 20px;
+    float: left;
+    background-color: #ffffff;
+    color:#868686;
+    width: 100px;
+    text-align: center;
+}
