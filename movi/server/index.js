@@ -14,7 +14,10 @@ const PORT = process.env.PORT || 8000;
 mongoose.connect(process.env.MOVI_DB_URI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true })
-    .then(() => app.listen(PORT, () => { // If connection success, then...
-        console.log('Server running at localhost:' + PORT);
-    }))
+    .then(() => { // If connection success, then...
+        console.log('MongoDB Connected...');
+        app.listen(PORT, () => { // Start the server
+            console.log('Server running at localhost:' + PORT);
+        });
+    })
     .catch((error) => console.log(error.message)); // If error, catch it...
