@@ -1,6 +1,6 @@
 // This file is the main launching point for the application.
 // This is what is called by the start script "nodemon start"
-//      defined in package.json
+//defined in package.json
 
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
