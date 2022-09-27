@@ -16,8 +16,9 @@ app.use(bodyParser.json({ limit: "30mb", extended: true})); // Body parser is fo
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true})); // We may not need it...
 app.use(cors());
 
+// Produce error for unknown routes
 app.use('*', (req,res) => {
-    res.status(404).json({error: "not found"});
+    res.status(404).json({error: "route not found"});
 })
 
 export default app
