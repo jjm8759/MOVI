@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
 const { Schema, SchemaTypes, model } = mongoose;
 
-import watchedTitle from './watchedTitle.js';
-import recommendedTitleSchema from './recommendedTitle.js';
-
 // In order of relevance...
 // https://mongoosejs.com/docs/subdocs.html
 // https://mongoosejs.com/docs/schematypes.html#arrays
@@ -13,8 +10,18 @@ const userSchema = new Schema({
     name: String,
     loginAuth: String,
     watchModes: [String],
-    watchedTitles: [watchedTitle],
-    recommendedTitles: [recommendedTitleSchema],
+    watchedTitles: [{
+        watchedTitle: {
+            type: SchemaTypes.ObjectId,
+            ref: 'WatchedTitleSchema'
+        }
+    }],
+    recommendedTitles: [{
+        recommendedTitleSchema: {
+            type: SchemaTypes.ObjectId,
+            ref: 'WatchedTitleSchema'
+        }
+    }],
 });
 
 const User = model('User', userSchema);
