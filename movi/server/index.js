@@ -33,7 +33,7 @@ const user = await User.create({
     firstName: "Will",
     lastName: "Robinson",
     email: "robots@beep.boop",
-    password: "iheartrobots",
+    passwordHash: "iheartrobots",
     watchModes: ["NETFLIX", "DISNEYPLUS"],
 });
 
