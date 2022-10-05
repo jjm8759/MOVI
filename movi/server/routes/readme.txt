@@ -1,1 +1,2 @@
-This folder contains the definitions for all of the webapp's express routes.
+This folder contains the definitions for 
+all of the RESTful API's express routes.
