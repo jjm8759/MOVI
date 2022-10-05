@@ -45,7 +45,6 @@ const title = await Title.create({
 const watchedMovie = await WatchedTitle.create({
     user: user,
     title: title,
-    favorited: false,
     userStars: 5
 });
 
@@ -55,9 +54,5 @@ const recommendedTitle = await RecommendedTitle.create({
     watchlinkClicked: true,
     clickActionDate: Date.now()
 });
-
-user.watchedTitles.push(watchedMovie);
-user.recommendedTitles.push(recommendedTitle);
-await user.save();
   
 console.log(user);
