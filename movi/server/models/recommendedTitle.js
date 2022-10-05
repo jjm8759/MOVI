@@ -1,14 +1,27 @@
 import mongoose from 'mongoose';
-const { Schema } = mongoose;
+const { Schema, SchemaTypes, model } = mongoose;
 
 const recommendedTitleSchema = new Schema({
-    watchmodeId: Number,
-    title: String,
+    user: {
+        type: SchemaTypes.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    title: {
+        type: SchemaTypes.ObjectId,
+        ref: 'Title',
+        required: true
+    },
     watchlinkClicked: {
         type: Boolean,
         default: false
     },
-    clickActionDate: Date,
+    clickActionDate: {
+        type: Date,
+        default: null
+    }
 });
 
-export default recommendedTitleSchema;
+const RecommendedTitle = model('RecommendedTitle', recommendedTitleSchema);
+
+export default RecommendedTitle;

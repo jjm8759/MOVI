@@ -6,22 +6,45 @@ const { Schema, SchemaTypes, model } = mongoose;
 // https://mongoosejs.com/docs/schematypes.html#arrays
 // https://stackoverflow.com/a/60682796
 const userSchema = new Schema({
-    _id: SchemaTypes.ObjectId,
-    name: String,
-    loginAuth: String,
-    watchModes: [String],
-    watchedTitles: [{
-        watchedTitle: {
-            type: SchemaTypes.ObjectId,
-            ref: 'WatchedTitleSchema'
-        }
-    }],
-    recommendedTitles: [{
-        recommendedTitleSchema: {
-            type: SchemaTypes.ObjectId,
-            ref: 'WatchedTitleSchema'
-        }
-    }],
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        lowercase: true,
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    watchModes: {
+        type: [String],
+        default: []
+    },
+    watchedTitles: {
+        type: [{
+            watchedTitle: {
+                type: SchemaTypes.ObjectId,
+                ref: 'WatchedTitle'
+            }
+        }],
+        default: []
+    },
+    recommendedTitles: {
+        type: [{
+            recommendedTitle: {
+                type: SchemaTypes.ObjectId,
+                ref: 'RecommendedTitle'
+            }
+        }],
+        default: []
+    }
 });
 
 const User = model('User', userSchema);
