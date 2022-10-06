@@ -5,12 +5,19 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+import usersRoutes from './routes/usersRoutes.js';
+import titlesRoutes from './routes/titlesRoutes.js';
 import watchedRoutes from './routes/watchedRoutes.js';
+import recommendedRoutes from './routes/recommendedRoutes.js';
 
 const app = express();
 
 // Specify where to send requests to supported routes
+app.use('/titles', titlesRoutes);
+app.use('/users', usersRoutes);
 app.use('/watched', watchedRoutes);
+app.use('/recommended', recommendedRoutes);
+
 
 app.use(bodyParser.json({ limit: "30mb", extended: true})); // Body parser is for parsing response bodies
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true})); // We may not need it...

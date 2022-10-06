@@ -6,6 +6,10 @@ const { Schema, SchemaTypes, model } = mongoose;
 // https://mongoosejs.com/docs/schematypes.html#arrays
 // https://stackoverflow.com/a/60682796
 const userSchema = new Schema({
+    userId: {
+        type: Number,
+        required: true
+    },
     firstName: {
         type: String,
         required: true
@@ -19,30 +23,16 @@ const userSchema = new Schema({
         required: true,
         lowercase: true,
     },
-    password: {
+    passwordHash: {
         type: String,
         required: true
     },
+    sessionToken: {
+        type: String,
+        default: null
+    },
     watchModes: {
         type: [String],
-        default: []
-    },
-    watchedTitles: {
-        type: [{
-            watchedTitle: {
-                type: SchemaTypes.ObjectId,
-                ref: 'WatchedTitle'
-            }
-        }],
-        default: []
-    },
-    recommendedTitles: {
-        type: [{
-            recommendedTitle: {
-                type: SchemaTypes.ObjectId,
-                ref: 'RecommendedTitle'
-            }
-        }],
         default: []
     }
 });
