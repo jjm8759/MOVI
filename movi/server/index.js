@@ -30,6 +30,7 @@ mongoose.connect(process.env.MOVI_DB_URI, {
 
 // Create a new User and insert into database
 const user = await User.create({
+    userId: 0,
     firstName: "Will",
     lastName: "Robinson",
     email: "robots@beep.boop",
