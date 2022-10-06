@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteUsers, getUsers, postUsers, putUsers } from '../controllers/usersLogic';
+import { deleteUsers, getUsers, postUsers, putUsers } from '../controllers/usersLogic.js';
 
 const router = express.Router(); // Get access to express router
 
