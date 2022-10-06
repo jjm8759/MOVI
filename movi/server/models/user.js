@@ -6,10 +6,6 @@ const { Schema, SchemaTypes, model } = mongoose;
 // https://mongoosejs.com/docs/schematypes.html#arrays
 // https://stackoverflow.com/a/60682796
 const userSchema = new Schema({
-    userId: {
-        type: Number,
-        required: true
-    },
     firstName: {
         type: String,
         required: true

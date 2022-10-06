@@ -25,6 +25,58 @@ const titleSchema = new Schema({
         type: String,
         required: true
     },
+    plot_overview: {
+        type: String,
+        default: ""
+    },
+    title_type: {
+        type: String,
+        required: true
+    },
+    runtime_minutes: {
+        type: Number,
+        required: true
+    },
+    year: {
+        type: Number,
+        required: true
+    },
+    genre_names: {
+        type: [String],
+        required: true
+    },
+    user_rating: {
+        type: Number,
+        required: true
+    },
+    critic_score: {
+        type: Number,
+        required: true
+    },
+    us_rating: {
+        type: String,
+        required: true
+    },
+    poster_url: {
+        type: String,
+        required: true
+    },
+    backdrop: {
+        type: String,
+        required: true
+    },
+    similar_titles: { 
+        type: [Number], 
+        required: true 
+    },
+    trailer_url: {
+        type: String,
+        required: true
+    },
+    trailer_thumbnail: {
+        type: String,
+        required: true
+    }
 });
 
 const Title = model('Title', titleSchema);
