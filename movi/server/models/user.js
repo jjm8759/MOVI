@@ -34,6 +34,10 @@ const userSchema = new Schema({
     watchModes: {
         type: [String],
         default: []
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
 
