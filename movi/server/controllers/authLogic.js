@@ -6,7 +6,7 @@ export const postUser = ("/register", async(req,res) =>{
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        passwordHash: req.body.passwordHash
+        passwordHash: CryptoJS.AES.encrypt(req.body.passwordHash, process.env.PASS).toString()
     });
 
     try{
