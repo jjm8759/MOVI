@@ -14,12 +14,12 @@ import WatchedTitle from './models/watchedTitle.js';
 import RecommendedTitle from './models/recommendedTitle.js';
 
 dotenv.config();
-
 const PORT = process.env.PORT || 8000;
 // Connect to MongoDB with mongoose -- https://cloud.mongodb.com/
 mongoose.connect(process.env.MOVI_DB_URI, { 
     useNewUrlParser: true, 
-    useUnifiedTopology: true })
+    useUnifiedTopology: true,
+    })
     .then(() => { // If connection success, then...
         console.log('MongoDB Connected...');
         app.listen(PORT, () => { // Start the server
@@ -35,6 +35,7 @@ const user = await User.create({
     email: "robots@beep.boop",
     passwordHash: "iheartrobots",
     watchModes: ["NETFLIX", "DISNEYPLUS"],
+    isAdmin: true,
 });
 
 const title = await Title.create({
