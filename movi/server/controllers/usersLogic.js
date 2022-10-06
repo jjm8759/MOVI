@@ -1,4 +1,3 @@
-import router from "express";
 import User from "../models/user.js";
 import CryptoJS from "crypto-js";
 import verify from "../verifyToken.js";
@@ -103,4 +102,4 @@ export const getUserStatistics = ("/stats", async (req, res) => {
   }
 });
 
-export default router;
+
