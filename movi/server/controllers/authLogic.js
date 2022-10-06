@@ -1,7 +1,10 @@
 import User from "../models/user.js";
 import CryptoJS from "crypto-js";
 
-export const postUser = ("/register", async(req,res) =>{
+/**
+ * Registers a new user to the database and encrypts their password
+ */
+export const registerUser = ("/register", async(req,res) =>{
     const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -15,4 +18,4 @@ export const postUser = ("/register", async(req,res) =>{
     }catch(err){
 
     }
-})
+});

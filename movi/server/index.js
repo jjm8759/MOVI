@@ -19,7 +19,6 @@ const PORT = process.env.PORT || 8000;
 mongoose.connect(process.env.MOVI_DB_URI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
-    useCreateIndexes: true
     })
     .then(() => { // If connection success, then...
         console.log('MongoDB Connected...');
@@ -37,6 +36,7 @@ const user = await User.create({
     email: "robots@beep.boop",
     passwordHash: "iheartrobots",
     watchModes: ["NETFLIX", "DISNEYPLUS"],
+    isAdmin: true,
 });
 
 const title = await Title.create({
