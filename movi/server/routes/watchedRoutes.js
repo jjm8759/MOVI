@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getWatched, postWatched, putWatched, deleteWatched } from '../controllers/watchedLogic.js';
+import { getWatched, postWatched, putWatched, deleteWatched } from '../actions/watchedActions.js';
 
 const router = express.Router(); // Get access to express router
 

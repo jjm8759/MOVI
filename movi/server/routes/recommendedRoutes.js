@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteRecommended, getRecommended, postRecommended, putRecommended } from '../controllers/recommendedLogic.js';
+import { deleteRecommended, getRecommended, postRecommended, putRecommended } from '../actions/recommendedActions.js';
 
 const router = express.Router(); // Get access to express router
 

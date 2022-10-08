@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jjm8759/MOVI#readme",
   "dependencies": {
+    "axios": "^1.1.2",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
@@ -26,7 +27,6 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",
     "mongoose": "^6.6.1",
-    "node-fetch": "^3.2.10",
     "nodemon": "^2.0.20"
   }
 }

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema, SchemaTypes, model } = mongoose;
 
-const streamingSource = new Schema({
+const streamingSourceSchema = new Schema({
     title: {
         type: SchemaTypes.ObjectId,
         ref: "Title"
@@ -17,6 +17,6 @@ const streamingSource = new Schema({
     episodes: { type: Number, required: true }
 });
 
-const StreamingSource = model('StreamingSource', streamingSource);
+const StreamingSource = model('StreamingSource', streamingSourceSchema);
 
 export default StreamingSource;

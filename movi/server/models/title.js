@@ -29,7 +29,7 @@ const titleSchema = new Schema({
         type: String,
         default: ""
     },
-    title_type: {
+    type: {
         type: String,
         required: true
     },
@@ -57,7 +57,7 @@ const titleSchema = new Schema({
         type: String,
         required: true
     },
-    poster_url: {
+    poster: {
         type: String,
         required: true
     },
@@ -69,7 +69,7 @@ const titleSchema = new Schema({
         type: [Number], 
         required: true 
     },
-    trailer_url: {
+    trailer: {
         type: String,
         required: true
     },
