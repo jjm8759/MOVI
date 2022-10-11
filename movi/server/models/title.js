@@ -43,11 +43,11 @@ const titleSchema = new Schema({
     },
     genre_names: {
         type: [String],
-        required: true
+        default: []
     },
     user_rating: {
         type: Number,
-        required: true
+        default: null
     },
     critic_score: {
         type: Number,
@@ -59,23 +59,23 @@ const titleSchema = new Schema({
     },
     poster: {
         type: String,
-        required: true
+        default: null
     },
     backdrop: {
         type: String,
-        required: true
+        default: null
     },
     similar_titles: { 
         type: [Number], 
-        required: true 
+        default: []
     },
     trailer: {
         type: String,
-        required: true
+        default: null
     },
     trailer_thumbnail: {
         type: String,
-        required: true
+        default: null
     }
 });
 
