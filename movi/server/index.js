@@ -9,16 +9,13 @@ import app from './app.js'; // Import the express app from app.js
 
 // import models for testing
 import User from './models/user.js';
-import Title from './models/title.js';
-import WatchedTitle from './models/watchedTitle.js';
-import RecommendedTitle from './models/recommendedTitle.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 // Connect to MongoDB with mongoose -- https://cloud.mongodb.com/
 mongoose.connect(process.env.MOVI_DB_URI, { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true,
+        useNewUrlParser: true, 
+        useUnifiedTopology: true,
     })
     .then(() => { // If connection success, then...
         console.log('MongoDB Connected...');
@@ -36,22 +33,4 @@ mongoose.connect(process.env.MOVI_DB_URI, {
 //     passwordHash: "iheartrobots",
 //     watchModes: ["NETFLIX", "DISNEYPLUS"],
 //     isAdmin: true,
-// });
-
-// const title = await Title.create({
-//     watchmodeId: 1234,
-//     title: "That Movie 2",
-// });
-
-// const watchedMovie = await WatchedTitle.create({
-//     user: user,
-//     title: title,
-//     userStars: 5
-// });
-
-// const recommendedTitle = await RecommendedTitle.create({
-//     user: user,
-//     title: title,
-//     watchlinkClicked: true,
-//     clickActionDate: Date.now()
 // });

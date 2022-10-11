@@ -13,8 +13,8 @@ const streamingSourceSchema = new Schema({
     web_url: { type: String, required: true },
     format: { type: String, required: true },
     price: { type: Number, default: null },
-    seasons: { type: Number, required: true },
-    episodes: { type: Number, required: true }
+    seasons: { type: Number, default: null },
+    episodes: { type: Number, default: null }
 });
 
 const StreamingSource = model('StreamingSource', streamingSourceSchema);

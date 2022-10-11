@@ -6,15 +6,15 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 //import usersRoutes from './routes/usersRoutes.js';
-import titlesRoutes from './routes/titleRoutes.js';
+import titleRoutes from './routes/titleRoutes.js';
 import watchedRoutes from './routes/watchedRoutes.js';
 import recommendedRoutes from './routes/recommendedRoutes.js';
 
 const app = express();
 
 // Specify where to send requests to supported routes
-app.use('/title', titlesRoutes);
-//app.use('/user', usersRoutes);
+app.use('/title', titleRoutes);
+//app.use('/user', userRoutes);
 app.use('/watched', watchedRoutes);
 app.use('/recommended', recommendedRoutes);
 

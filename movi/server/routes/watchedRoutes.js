@@ -4,7 +4,7 @@ import { getWatched, postWatched, putWatched, deleteWatched } from '../actions/w
 
 const router = express.Router(); // Get access to express router
 
-// root at localhost:5000/watched/
+// root at localhost:5000/watched
 router.get('/', (req, res) => getWatched(req, res));
 router.post('/', (req, res) => postWatched(req, res));
 router.put('/', (req, res) => putWatched(req, res));

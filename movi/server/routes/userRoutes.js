@@ -3,7 +3,7 @@
 
 // const router = express.Router(); // Get access to express router
 
-// // root at localhost:5000/users/
+// // root at localhost:5000/users
 // router.get('/:id', (req, res) => getUsersById(req, res));
 // router.get('/', (req, res) => getAllUsers(req, res));
 // router.get('/email', (req, res) => getUserEmail(req, res));

@@ -51,11 +51,11 @@ const titleSchema = new Schema({
     },
     critic_score: {
         type: Number,
-        required: true
+        default: null
     },
     us_rating: {
         type: String,
-        required: true
+        default: null
     },
     poster: {
         type: String,
