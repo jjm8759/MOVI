@@ -4,7 +4,8 @@ const { Schema, SchemaTypes, model } = mongoose;
 const streamingSourceSchema = new Schema({
     title: {
         type: SchemaTypes.ObjectId,
-        ref: "Title"
+        ref: "Title",
+        required: true
     },
     source_id: { type: Number, required: true },
     name: { type: String, required: true },
