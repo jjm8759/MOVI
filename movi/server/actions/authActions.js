@@ -1,6 +1,6 @@
 import User from "../models/user.js";
 import CryptoJS from "crypto-js";
-import {checkDuplicateEmail} from "../middlewares/verifyUser.js";
+
 /**
  * Registers a new user to the database and encrypts their password 
  */
@@ -8,11 +8,7 @@ export const registerUser = async(req,res) =>{
     const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: {$cond: {
-            if: {checkDuplicateEmail},
-            then: req.body.email,
-        }
-    },
+        email: req.body.email,
         passwordHash: CryptoJS.AES.encrypt(req.body.passwordHash, process.env.PASS).toString()
     });
 

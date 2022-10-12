@@ -27,8 +27,4 @@ function checkDuplicateEmail(req,res,next){
   return true;
 }
 
-const verifyEmail = {
-  checkDuplicateEmail,
-};
-
 export default verifyEmail;
