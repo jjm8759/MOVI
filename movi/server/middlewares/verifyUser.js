@@ -19,7 +19,7 @@ function checkDuplicateEmail(req,res,next){
     }
 
     if (user) {
-      res.status(400).send({ message: "Email is already in use!" });
+      res.status(401).send({ message: "Email is already in use!" });
       return;
     }
 
@@ -28,7 +28,7 @@ function checkDuplicateEmail(req,res,next){
 }
 
 const verifyEmail = {
-  verifyEmail,
+  checkDuplicateEmail,
 };
 
 export default verifyEmail;
