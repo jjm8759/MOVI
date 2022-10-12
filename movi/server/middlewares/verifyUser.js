@@ -9,7 +9,7 @@ import User from '../models/user.js'
  * Checks if the users email is in use or not. This will be used for the sign up functionality so 
  * there are no duplicate user logins in the future.
  */
-function verifyEmail(req,res,next){
+function checkDuplicateEmail(req,res,next){
   User.findOne({
     email: req.body.email
   }).exec((err, user) => {
@@ -27,5 +27,8 @@ function verifyEmail(req,res,next){
   });
 }
 
+const verifyEmail = {
+  verifyEmail,
+};
 
 export default verifyEmail;
