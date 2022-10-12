@@ -1,5 +1,5 @@
 import  verifyUser from "../middlewares/verifyUser.js";
-import actions from "../controllers/authActions";
+import {loginUser,registerUser} from "../actions/authActions.js";
 import express from 'express';
 
 const router = express.Router();
@@ -15,11 +15,9 @@ router.use((req, res, next) => {
 });
 
 //Checks if user is providing a duplicate email before generating a new user.
-router.post("/signup",
-    [
-    verifyEmail.checkDuplicateEmail,
-    ],
-    actions.signup
+router.post("/signup", [verifyUser.checkDuplicateEmail], (req,res) => registerUser(req,res)
     );
 
-router.post("/signin", actions.signin);
+router.post("/signin",(req,res) =>  loginUser(req,res));
+
+export default router;

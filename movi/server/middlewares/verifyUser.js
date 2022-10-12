@@ -27,4 +27,4 @@ function checkDuplicateEmail(req,res,next){
   return true;
 }
 
-export default verifyEmail;
+export default checkDuplicateEmail;
