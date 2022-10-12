@@ -1,8 +1,8 @@
 
-export const allAccess = async (req, res) => {
+export const signUpPage = async (req, res) => {
     res.status(200).send("Sign Up Page");
   };
 
-export const userBoard = async (req, res) => {
+export const userDiscover = async (req, res) => {
     res.status(200).send("User Discover Page");
   };

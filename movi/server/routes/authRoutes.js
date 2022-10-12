@@ -1,23 +1,25 @@
 import  verifyUser from "../middlewares/verifyUser.js";
 import actions from "../controllers/authActions";
+import express from 'express';
 
-app.use(function(req, res, next) {
+const router = express.Router();
 
-    //Allows the verifyUser file to make a request to this route
+
+//This is used so that the verifyUser file can make calls to this route without being blocked
+router.use((req, res, next) => {
     res.header(
       "Access-Control-Allow-Headers",
       "x-access-token, Origin, Content-Type, Accept"
     );
     next();
-  });
+});
 
-app.post(
-    "/signup",
+//Checks if user is providing a duplicate email before generating a new user.
+router.post("/signup",
     [
-      verifyEmail.checkDuplicateEmail,
+    verifyEmail.checkDuplicateEmail,
     ],
     actions.signup
-  );
+    );
 
-  app.post("/signin", controller.signin);
-
+router.post("/signin", actions.signin);

@@ -14,11 +14,9 @@ const app = express();
 
 // Specify where to send requests to supported routes
 app.use('/title', titleRoutes);
-//app.use('/user', userRoutes);
+app.use('/user', userRoutes);
 app.use('/watched', watchedRoutes);
 app.use('/recommended', recommendedRoutes);
-
-app.use 
 app.use(bodyParser.json({ limit: "30mb", extended: true})); // Body parser is for parsing response bodies
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true})); // We may not need it...
 app.use(cors());
