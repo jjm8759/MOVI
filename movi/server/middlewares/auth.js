@@ -2,7 +2,7 @@
  * This file verifies the users token using a secret key
  */
 import jwt from 'jsonwebtoken';
-import config from '../auth.config.js';
+
 import User from '../models/user.js'
 
 
@@ -13,7 +13,7 @@ export const verifyToken = async (req, res, next) => {
       return res.status(403).send({ message: "Token not provided" });
     }
   
-    jwt.verify(token, config.authKey, (err, decoded) => {
+    jwt.verify(token, process.env.PASS, (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: "Token not authorized" });
       }
@@ -21,3 +21,5 @@ export const verifyToken = async (req, res, next) => {
       next();
     });
   };
+
+export default verifyToken;

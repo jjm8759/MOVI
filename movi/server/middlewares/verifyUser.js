@@ -2,7 +2,6 @@
  * This file verifies that the users email is unique to the database and if the token matches the current user
  */
 
-import jwt from 'jsonwebtoken';
 import User from '../models/user.js'
 
 /**
@@ -25,6 +24,7 @@ function checkDuplicateEmail(req,res,next){
 
     next();
   });
+  return true;
 }
 
 const verifyEmail = {
