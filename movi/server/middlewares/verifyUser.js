@@ -14,17 +14,14 @@ function checkDuplicateEmail(req,res,next){
   }).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
-      return;
+      return false;
     }
-
     if (user) {
       res.status(401).send({ message: "Email is already in use!" });
-      return;
+      return true;
     }
-
     next();
   });
-  return true;
 }
 
 export default checkDuplicateEmail;

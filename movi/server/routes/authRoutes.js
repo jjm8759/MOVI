@@ -15,8 +15,7 @@ router.use((req, res, next) => {
 });
 
 //Checks if user is providing a duplicate email before generating a new user.
-router.post("/signup", [verifyUser.checkDuplicateEmail], (req,res) => registerUser(req,res)
-    );
+router.post("/signup",  (req,res) => registerUser(req,res));
 
 router.post("/signin",(req,res) =>  loginUser(req,res));
 

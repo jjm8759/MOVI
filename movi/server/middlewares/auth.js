@@ -7,19 +7,18 @@ import User from '../models/user.js'
 
 
 export const verifyToken = async (req, res, next) => {
-    let token = req.headers["x-access-token"];
-  
-    if (!token) {
-      return res.status(403).send({ message: "Token not provided" });
-    }
-  
-    jwt.verify(token, process.env.PASS, (err, decoded) => {
-      if (err) {
-        return res.status(401).send({ message: "Token not authorized" });
-      }
-      req.userId = decoded.id;
+  const authHeader = req.headers.token;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, process.env.PASS, (err, user) => {
+      if (err) res.status(403).json("Token is not valid!");
+      req.user = user;
       next();
     });
-  };
+  } else {
+    res.status(401).json("You are not authenticated!");
+  }
+}
 
 export default verifyToken;

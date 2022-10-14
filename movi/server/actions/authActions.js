@@ -1,10 +1,14 @@
 import User from "../models/user.js";
 import CryptoJS from "crypto-js";
+import checkDuplicateEmail from "../middlewares/verifyUser.js";
 
 /**
  * Registers a new user to the database and encrypts their password 
  */
 export const registerUser = async(req,res) =>{
+    if(checkDuplicateEmail){
+      res.status(400).json("This email is already in use");
+    }
     const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -16,7 +20,7 @@ export const registerUser = async(req,res) =>{
         const user = newUser.save();
         res.status(201).res.json(user);
     }catch(err){
-
+      console.log(err);
     }
 };
 
@@ -29,26 +33,25 @@ export const loginUser = async(req,res) => {
     }).exec((err, user) => {
         if (err) {
           res.status(500).send({ message: err });
-          return;
         }
   
         if (!user) {
-          return res.status(404).send({ message: "Email Not found." });
+          res.status(404).send({ message: "Email Not found." });
         }
         
-        if(CryptoJS.AES.decrypt(user.passwordHash, process.env.PASS).toString() === req.body.passwordHash){
-            
-        }else{
+        let originalPassword = CryptoJS.AES.decrypt(user.passwordHash, process.env.PASS).toString();
+
+        if( originalPassword !== req.body.passwordHash){
             res.status(401).send({message: "Incorrect Password"});
         }
   
         if (!passwordValid) {
-          return res.status(401).send({
+          res.status(401).send({
             sessionToken: null,
             message: "Invalid Password!"
           });
         }
-  
+        
         let token = jwt.sign({ email: user.email }, process.env.PASS, {
           expiresIn: 86400 // 24 hours
         });
