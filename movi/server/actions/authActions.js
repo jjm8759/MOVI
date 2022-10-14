@@ -44,13 +44,6 @@ export const loginUser = async(req,res) => {
         if( originalPassword !== req.body.passwordHash){
             res.status(401).send({message: "Incorrect Password"});
         }
-  
-        if (!passwordValid) {
-          res.status(401).send({
-            sessionToken: null,
-            message: "Invalid Password!"
-          });
-        }
         
         let token = jwt.sign({ email: user.email }, process.env.PASS, {
           expiresIn: 86400 // 24 hours

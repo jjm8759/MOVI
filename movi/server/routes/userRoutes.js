@@ -1,5 +1,4 @@
 import express from 'express';
-import auth from '../middlewares/auth.js'
 import {signUpPage, userByEmail} from '../actions/userActions.js'
 const router = express.Router(); // Get access to express router
 
