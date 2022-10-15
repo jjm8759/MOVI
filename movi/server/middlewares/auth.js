@@ -6,13 +6,18 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.js'
 
 
+/**
+ * Verifies the json web token using a password held in the repo's .env
+ */
 export const verifyToken = async (req, res, next) => {
   const authHeader = req.headers.token;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
 
     jwt.verify(token, process.env.PASS, (err, user) => {
-      if (err) res.status(403).json("Token is not valid!");
+      if (err) {
+        res.status(403).json("Token is not valid!");
+      }
       req.user = user;
       next();
     });

@@ -11,6 +11,7 @@ export const putRecommended = async (req, res) => {
     res.send('This is the PUT response for the localhost:5000/recommended route...');
 }
 
+// When a title is added to the watched list it will be deleted from the recommended
 export const deleteRecommended = async (req, res) => {
     res.send('This is the DELETE response for the localhost:5000/recommended route...');
 }
