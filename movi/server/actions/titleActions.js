@@ -1,7 +1,7 @@
 // I think the only endpoints we'll need are get endpoints.
 
 import { populateTitleById, searchTitlesByPartialString } from "../externalApi/actions.js";
-import StreamingSource from "../models/streamingSource.js";
+import TitleSource from "../models/titleSource.js";
 import Title from "../models/title.js";
 
 // GET request logic - (R)ead in CRUD
@@ -9,48 +9,47 @@ import Title from "../models/title.js";
 //     res.send('This is the GET response for the localhost:5000/titles route...');
 // }
 
+async function fetchTitleById(id) {
+    let title = await Title.findOne({ watchmodeId: id });
+
+    if (title == null) { 
+        console.log(`Title with id ${id} not found in database. Fetching from third-party API...`);
+        title = await populateTitleById(id);
+    }
+    if (title == null) return null;
+
+    let sources = await TitleSource.where("title").equals(title._id);
+    title = title.toObject();
+    title.sources = sources;
+    return title;
+}
+
+export const getTitleById = async (req, res) => {
+    let { id } = req.params;
+    id = parseInt(id);
+    let title = await fetchTitleById(id);
+    if (title == null) return res.status(404).send(`No title with id: ${id}`);
+    res.json(title);
+}
+
 export const getAutoCompleteSearchResults = async (req,res) => {
-    let { search_query } = req.query;
+    let { search_query, populate } = req.query;
 
     let results = await searchTitlesByPartialString(search_query);
 
     if (results == null) res.status(404).send(`No search results from query: ${search_query}`);
 
+    if (populate === 'false') {
+        return res.json(results);
+    }
+
     let titles = [];
-    for (const result in res.results) {
-        let id = result.id;
-
-        let title = await Title.findOne({ watchmodeId: id });
-        if (title == null) { 
-            console.log(`Title with id ${id} not found in database. Fetching from third-party API...`)
-            title = await populateTitleById(id);
-        }
-        if (title == null) continue;
-
-        let sources = await StreamingSource.where("title").equals(title._id);
-        title.sources = sources
-        title = title.toObject();
+    for (var result of results) {
+        let title = await fetchTitleById(result.id);
+        console.log(title);
         titles.push(title);
     }
-
-    results.results = titles;
-    res.json(results);
-}
-
-export const getTitleById = async (req, res) => {
-    let { id } = req.params;
-    let title = await Title.findOne({ watchmodeId: id });
-
-    if (title == null) { 
-        console.log(`Title with id ${id} not found in database. Fetching from third-party API...`)
-        title = await populateTitleById(id);
-    }
-    if (title == null) return res.status(404).send(`No title with id: ${id}`);
-
-    let sources = await StreamingSource.where("title").equals(title._id);
-    title = title.toObject();
-    title.sources = sources;
-    res.json(title);
+    res.json(titles);
 }
 
 // export const postTitles = async (req, res) => {
