@@ -63,11 +63,11 @@ async function createTitle(title_data) {
 }
 
 async function createSource(source, title) {
-    let provider = Provider.findOne({id: source.source_id})
+    let provider = await Provider.findOne({id: source.source_id})
     await TitleSource.create({
         title: title,
         provider: provider,
-        provider_id: source.source_id,
+        source_id: source.source_id,
         name: source.name,
         type: source.type,
         region: source.region,
@@ -127,7 +127,7 @@ const updateGenres = async () => {
     let url = `${watchmodeUrl}/genres/?apiKey=${watchmodeApiKey}`;
     let res = await fetch(url);
 
-    Genre.deleteMany({});
+    await Genre.deleteMany({});
     for (const genre of res) {
         await Genre.create({
             id: genre.id,
