@@ -33,13 +33,13 @@ export const getTitleById = async (req, res) => {
 }
 
 export const getAutoCompleteSearchResults = async (req,res) => {
-    let { search_query, populate } = req.query;
+    let { search_query, verbose } = req.query;
 
     let results = await searchTitlesByPartialString(search_query);
 
     if (results == null) res.status(404).send(`No search results from query: ${search_query}`);
 
-    if (populate === 'false') {
+    if (verbose === 'false') {
         return res.json(results);
     }
 
