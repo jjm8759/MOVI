@@ -52,6 +52,10 @@ export const getAutoCompleteSearchResults = async (req,res) => {
     res.json(titles);
 }
 
+export const getTitleListings = async (req, res) => {
+    let { types, source_types, source_ids, genre_ids } = req.query;
+}
+
 // export const postTitles = async (req, res) => {
 //     res.send('This is the POST response for the localhost:5000/titles route...');
 // }
