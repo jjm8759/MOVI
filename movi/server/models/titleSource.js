@@ -12,7 +12,7 @@ const titleSourceSchema = new Schema({
         ref: "Provider",
         required: true
     },
-    provider_id: { type: Number, required: true },
+    source_id: { type: Number, required: true },
     name: { type: String, required: true },
     type: { type: String, required: true },
     region: { type: String, required: true },
