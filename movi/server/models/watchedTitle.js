@@ -19,6 +19,10 @@ const watchedTitleSchema = new Schema({
     userStars: {
         type: Number,
         default: -1 // -1 for has not been rated by the user
+    },
+    lastWatched: {
+        type: Date,
+        default: () => Date.now()
     }
 });
 
