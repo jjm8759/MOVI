@@ -19,6 +19,17 @@ const getQuotaUsagePercent = async () => {
 }
 
 /**
+ * https://api.watchmode.com/docs/#title
+ * Uses 2 API call credits (because we're appending the sources endpoint)
+ * The resonse should be used to create documents for the title using Mongoose
+ * @param {Number} id The ID of the title to query for
+ * @returns The URL of the WatchMode query
+ */
+const getTitleDetailsQueryURL = (id) => {
+    return `${watchmodeUrl}/title/${id}/details/?apiKey=${watchmodeApiKey}&append_to_response=sources`
+}
+
+/**
  * https://api.watchmode.com/docs/#autocomplete-search
  * Uses 1 API call credit
  * @param {String} query The string query to search with (with spaces as '%20')
@@ -29,15 +40,15 @@ const getAutoCompleteQueryURL = (query, searchType) => {
     return `${watchmodeUrl}/autocomplete-search/?apiKey=${watchmodeApiKey}&search_value=${query}&search_type=${searchType}`;
 }
 
-/**
- * https://api.watchmode.com/docs/#title
- * Uses 2 API call credits (because we're appending the sources endpoint)
- * The resonse should be used to create documents for the title using Mongoose
- * @param {Number} id The ID of the title to query for
- * @returns The URL of the WatchMode query
- */
-const getTitleDetailsQueryURL = (id) => {
-    return `${watchmodeUrl}/title/${id}/details/?apiKey=${watchmodeApiKey}&append_to_response=sources`
+const getTitleListingsURL = (types, source_types, source_ids, genre_ids) => {
+    let url = `${watchmodeUrl}/list-titles/?apiKey=${watchmodeApiKey}&limit=20`;
+    
+    if (types != undefined) url.concat(`&types=${types}`);
+    if (source_types!= undefined) url.concat(`&source_types=${source_types}`);
+    if (source_ids != undefined) url.concat(`&source_ids=${source_ids}`);
+    if (genre_ids!= undefined) url.concat(`&genre_ids=${genre_ids}`);
+
+    return url;
 }
 
 async function createTitle(title_data) {
@@ -110,12 +121,36 @@ export const fetchTitlesByPartialString = async (searchQuery) => {
     let search_results = [];
     for (const result of res.results) {
         let title_info = {
-            name: result.name,
+            title: result.name,
             relevance: result.relevance,
-            type: result.type,
             id: result.id,
             year: result.year,
+            type: result.type,
             image_url: result.image_url
+        };
+        search_results.push(title_info);
+    }
+
+    return search_results; // return the results
+}
+
+export const fetchTitleListings = async (types, source_types, source_ids, genre_ids) => {
+    let url = getTitleListingsURL(types, source_types, source_ids, genre_ids);
+
+    let res = await fetch(url);
+    getQuotaUsagePercent();
+
+    if (res.success === false) {
+        return null;
+    }
+
+    let search_results = [];
+    for (const result of res.titles) {
+        let title_info = {
+            title: result.title,
+            id: result.id,
+            year: result.year,
+            type: result.type,
         };
         search_results.push(title_info);
     }
@@ -156,6 +191,7 @@ export default {
     getQuotaUsagePercent,
     fetchTitleById, 
     fetchTitlesByPartialString,
+    fetchTitleListings,
     updateGenres,
     updateProviders,
 };

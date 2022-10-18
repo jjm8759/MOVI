@@ -6,7 +6,7 @@
  * of this folder should not perform queries of external APIs.
  */
 
-import watchMode from './watchMode.js';
+import watchmode from './watchMode.js';
 
 /**
  * Populates a Titles collection document for the title, and populates
@@ -16,7 +16,7 @@ import watchMode from './watchMode.js';
  * @returns The newly created database document for the title or null (invalid id)
  */
 export const populateTitleById = async (id) => {
-    return await watchMode.fetchTitleById(id);
+    return await watchmode.fetchTitleById(id);
 }
 
 /**
@@ -26,7 +26,11 @@ export const populateTitleById = async (id) => {
  * @returns a list of search result objects
  */
  export const searchTitlesByPartialString = async (search_query) => {
-    return await watchMode.fetchTitlesByPartialString(search_query);
+    return await watchmode.fetchTitlesByPartialString(search_query);
+}
+
+export const getListTitlesResults = async (types, source_types, source_ids, genre_ids) => {
+    return await watchmode.fetchTitleListings(types, source_types, source_ids, genre_ids);
 }
 
 /**
@@ -34,7 +38,14 @@ export const populateTitleById = async (id) => {
  * using Watchmode endpoints. These collections provide a map of names to IDs.
  */
 export const updateDatabaseConfig = async () => {
-    await watchMode.updateGenres();
-    await watchMode.updateProviders();
+    await watchmode.updateGenres();
+    await watchmode.updateProviders();
     console.log("Database config updated.")
+}
+
+export default {
+    populateTitleById,
+    searchTitlesByPartialString,
+    getListTitlesResults,
+    updateDatabaseConfig,
 }

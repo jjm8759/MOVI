@@ -1,6 +1,6 @@
 // I think the only endpoints we'll need are get endpoints.
 
-import { populateTitleById, searchTitlesByPartialString } from "../externalApi/actions.js";
+import exApiActions from "../externalApi/actions.js";
 import TitleSource from "../models/titleSource.js";
 import Title from "../models/title.js";
 
@@ -14,7 +14,7 @@ async function fetchTitleById(id) {
 
     if (title == null) { 
         console.log(`Title with id ${id} not found in database. Fetching from third-party API...`);
-        title = await populateTitleById(id);
+        title = await exApiActions.populateTitleById(id);
     }
     if (title == null) return null;
 
@@ -35,7 +35,7 @@ export const getTitleById = async (req, res) => {
 export const getAutoCompleteSearchResults = async (req,res) => {
     let { search_query, verbose } = req.query;
 
-    let results = await searchTitlesByPartialString(search_query);
+    let results = await exApiActions.searchTitlesByPartialString(search_query);
 
     if (results == null) res.status(404).send(`No search results from query: ${search_query}`);
 
@@ -54,6 +54,8 @@ export const getAutoCompleteSearchResults = async (req,res) => {
 
 export const getTitleListings = async (req, res) => {
     let { types, source_types, source_ids, genre_ids } = req.query;
+    let results = await exApiActions.getListTitlesResults(types, source_types, source_ids, genre_ids)
+    
 }
 
 // export const postTitles = async (req, res) => {
