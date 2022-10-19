@@ -114,6 +114,8 @@ export const getAutoCompleteSearchResults = async (req,res) => {
  *      Sort order of results, possible values: relevance_desc, relevance_asc, 
  *      popularity_desc, popularity_asc, release_date_desc, release_date_asc, 
  *      title_desc, title_asc. Default value is: relevance_desc.
+ * 
+ *  Example query: localhost:5000/title/list/?types=movie&source_types=sub&source_ids=203,26,372&genre_ids=1&sort_by=popularity_desc
  * @param req The HTTP request
  * @param res The HTTP response: JSON containing the list of query results.
  */
