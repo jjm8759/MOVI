@@ -1,34 +1,36 @@
 import User from "../models/user.js";
 import CryptoJS from "crypto-js";
-import checkDuplicateEmail from "../middlewares/verifyUser.js";
+import {checkDuplicateEmail} from "../middlewares/verifyUser.js";
+import jwt from "jsonwebtoken";
 
 //Will grab a user by email provided
 //User user verify token middleware when implementing
 export const userByEmail = async (req, res) => {
-    res.status(200).send("User by email");
+    const user = User.findOne(req.body.email);
+    res.status(200).send(user);
   };
 
-export const changePassword = async (req,res) => {
-
-}
 
 /**
- * Registers a new user to the database and stores an encrypted version of their password 
+ * Registers a new user to the database and stores an encrypted version of their password
+ * then creates a session token for the user.
  */
  export const registerUser = async(req,res) =>{
-  if(checkDuplicateEmail){
-    res.status(400).json("This email is already in use");
-  }
+  let token = jwt.sign({ email: req.body.email }, process.env.PASS, {
+    expiresIn: 86400
+  });
+  checkDuplicateEmail(req,res);
   const newUser = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      passwordHash: CryptoJS.AES.encrypt(req.body.passwordHash, process.env.PASS).toString()
+      passwordHash: CryptoJS.AES.encrypt(req.body.passwordHash, process.env.PASS).toString(),
+      sessionToken: token
   });
 
   try{
-      const user = newUser.save();
-      res.status(201).res.json(user);
+      const user = await newUser.save();
+      res.status(201).send(user);
   }catch(err){
     console.log(err);
   }
@@ -40,7 +42,7 @@ export const changePassword = async (req,res) => {
 * and saves that token to the user schema.
 */
 export const loginUser = async(req,res) => {
-  const user = User.findOne({
+  User.findOne({
       email: req.body.email
   }).exec((err, user) => {
       if (err) {
