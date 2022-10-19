@@ -40,13 +40,14 @@ const getAutoCompleteQueryURL = (query, searchType) => {
     return `${watchmodeUrl}/autocomplete-search/?apiKey=${watchmodeApiKey}&search_value=${query}&search_type=${searchType}`;
 }
 
-const getTitleListingsURL = (types, source_types, source_ids, genre_ids) => {
+const getTitleListingsURL = (types, source_types, source_ids, genre_ids, sort_by) => {
     let url = `${watchmodeUrl}/list-titles/?apiKey=${watchmodeApiKey}&limit=20`;
     
-    if (types != undefined) url.concat(`&types=${types}`);
-    if (source_types!= undefined) url.concat(`&source_types=${source_types}`);
-    if (source_ids != undefined) url.concat(`&source_ids=${source_ids}`);
-    if (genre_ids!= undefined) url.concat(`&genre_ids=${genre_ids}`);
+    if (types) url += `&types=${types}`;
+    if (source_types) url += `&source_types=${source_types}`;
+    if (source_ids) url += `&source_ids=${source_ids}`;
+    if (genre_ids) url += `&genre_ids=${genre_ids}`;
+    if (sort_by) url += `&sort_by=${sort_by}`;
 
     return url;
 }
@@ -103,7 +104,7 @@ const fetchTitleById = async (id) => {
     
     let sources = res.sources;
     let sourcesPromises = sources.map(source => createSource(source, title));
-    await Promise.all(sourcesPromises)
+    await Promise.all(sourcesPromises);
 
     return title;
 }
@@ -134,8 +135,8 @@ export const fetchTitlesByPartialString = async (searchQuery) => {
     return search_results; // return the results
 }
 
-export const fetchTitleListings = async (types, source_types, source_ids, genre_ids) => {
-    let url = getTitleListingsURL(types, source_types, source_ids, genre_ids);
+export const fetchTitleListings = async (types, source_types, source_ids, genre_ids, sort_by) => {
+    let url = getTitleListingsURL(types, source_types, source_ids, genre_ids, sort_by);
 
     let res = await fetch(url);
     getQuotaUsagePercent();
