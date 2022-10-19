@@ -35,7 +35,7 @@ const titleSchema = new Schema({
     },
     runtime_minutes: {
         type: Number,
-        required: true
+        default: null
     },
     year: {
         type: Number,
