@@ -4,11 +4,8 @@
 
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-
 import app from './app.js'; // Import the express app from app.js
 
-// import models for testing
-import User from './models/user.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
@@ -24,13 +21,3 @@ mongoose.connect(process.env.MOVI_DB_URI, {
         });
     })
     .catch((error) => console.log(error.message)); // If error, catch it...
-
-// // Create a new User and insert into database
-// const user = await User.create({
-//     firstName: "Will",
-//     lastName: "Robinson",
-//     email: "robots@beep.boop",
-//     passwordHash: "iheartrobots",
-//     watchModes: ["NETFLIX", "DISNEYPLUS"],
-//     isAdmin: true,
-// });

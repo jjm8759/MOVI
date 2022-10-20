@@ -1,9 +1,11 @@
 import express from 'express';
-import {userByEmail, registerUser, loginUser} from '../actions/userActions.js'
+import {userByEmail, registerUser, loginUser, logout} from '../actions/userActions.js'
 
 const router = express.Router(); // Get access to express router
 
 router.get("/email",  (req,res) => userByEmail(req,res));
+
+router.get("/logout", (req,res) => logout(req,res));
 
 router.post("/signup",  (req,res) => registerUser(req,res));
 
