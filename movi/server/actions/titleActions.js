@@ -41,7 +41,8 @@ export const getTitleById = async (req, res) => {
     id = parseInt(id);
     let title = await fetchTitleById(id);
     if (title == null) return res.status(404).send(`No title with id: ${id}`);
-    res.json(title);
+
+    res.status(200).json(title);
 }
 
 /**
@@ -71,7 +72,7 @@ export const getAutoCompleteSearchResults = async (req,res) => {
     if (results == null) res.status(404).send(`No search results from query: ${search_query}`);
 
     if (verbose === 'false') {
-        return res.json(results);
+        return res.status(200).json(results);
     }
 
     let titles = [];
@@ -80,10 +81,12 @@ export const getAutoCompleteSearchResults = async (req,res) => {
         console.log(title);
         titles.push(title);
     }
-    res.json(titles);
+
+    res.status(200).json(titles);
 }
 
 /**
+ * Handles an HTTP get request for a list of titles matching the query params.
  * Returns a list of titles filtered by the provided query parameters. Does not
  * support a parameter to search by title string/substring (blame Watchmode).
  * 
@@ -122,5 +125,6 @@ export const getAutoCompleteSearchResults = async (req,res) => {
 export const getTitleListings = async (req, res) => {
     let { types, source_types, source_ids, genre_ids, sort_by } = req.query;
     let results = await exApiActions.getListTitlesResults(types, source_types, source_ids, genre_ids, sort_by);
-    res.json(results);
+
+    res.status(200).json(results);
 }

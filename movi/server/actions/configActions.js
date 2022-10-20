@@ -8,7 +8,7 @@ export const getGenres = async (req,res) => {
         id: genre.id,
         name: genre.name 
     }));
-    res.json(genres);
+    res.status(200).json(genres);
 }
 
 // Get a list of all supported providers and their metadata
@@ -21,5 +21,5 @@ export const getProviders = async (req,res) => {
         logo_100px: provider.logo_100px,
         regions: provider.regions
     }));
-    res.json(providers);
+    res.status(200).json(providers);
 }
