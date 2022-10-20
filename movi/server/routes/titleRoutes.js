@@ -7,8 +7,5 @@ const router = express.Router(); // Get access to express router
 router.get('/search/?', (req, res) => getAutoCompleteSearchResults(req, res));
 router.get('/list/?', (req, res) => getTitleListings(req, res));
 router.get('/:id?', (req, res) => getTitleById(req, res));
-// router.post('/', (req, res) => postTitles(req, res));
-// router.put('/', (req, res) => putTitles(req, res));
-// router.delete('/', (req, res) => deleteTitles(req, res));
 
 export default router;
