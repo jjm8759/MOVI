@@ -9,7 +9,7 @@ import Title from "../models/title.js";
  * @param {Number} id The ID of the title to fetch
  * @returns The title object with the matching ID, along with list of sources
  */
-async function fetchTitleById(id) {
+export async function fetchTitleById(id) {
     // check database for a matching title ID
     let title = await Title.findOne({ watchmodeId: id });
 
