@@ -45,21 +45,14 @@ export const registerUser = async (req, res) => {
     expiresIn: 86400
   });
   checkDuplicateEmail(req,res);
-  const newUser = new User({
+  const newUser = await User.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     passwordHash: CryptoJS.AES.encrypt(req.body.passwordHash, process.env.PASS).toString(),
     sessionToken: token
-  });
-  newUser.save(function (err, data) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      res.status(200).send("User created successfully " + data);
-    }
-  });
+  }).then(res.status(201).send("Registered Successfully"));
+  
 };
 
 /**

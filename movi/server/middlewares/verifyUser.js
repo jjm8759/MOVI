@@ -13,10 +13,10 @@ export const checkDuplicateEmail = async(req,res,next) => {
     email: req.body.email
   }).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      return res.status(500).send({ message: err });
     }
     if (user) {
-      res.status(401).send({ message: "Email is already in use!" });
+      return res.status(401).send({ message: "Email is already in use!" });
     }
   });
 }

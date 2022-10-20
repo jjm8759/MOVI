@@ -14,3 +14,9 @@ export const putWatched = async (req, res) => {
 export const deleteWatched = async (req, res) => {
     res.send('This is the DELETE response for the localhost:5000/watched route...');
 }
+
+//User needs to be able to remove a watched title
+//MANDATORY 
+///GET (Return the list of watched titles for user, takes in a user)
+//PUT (Adds a new title to the list of watched titles)
+//DELETE (Removes title from the users watched list)
