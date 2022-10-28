@@ -2,9 +2,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Discover from "./Pages/Discover/Discover";
-import Movies from "./Watched";
-import Account from "./Pages/Watched/Watched";
-import TVShows from "./TVShows";
+import Recommended from "./Pages/Recommended/Recommended";
+import Watched from "./Pages/Watched/Watched";
+import Register from './Pages/Register/Register';
 
 function App() {
   return (
