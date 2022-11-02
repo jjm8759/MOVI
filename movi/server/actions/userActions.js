@@ -1,25 +1,6 @@
 import User from "../models/user.js";
 import CryptoJS from "crypto-js";
-import { checkDuplicateEmail } from "../middlewares/verifyUser.js";
 import jwt from "jsonwebtoken";
-import verifyToken from "../middlewares/auth.js";
-
-//Will grab a user by email provided
-//User user verify token middleware when implementing
-export const userByEmail = async (req, res) => {
-  await verifyToken();
-  const user = User.findOne({
-    email: req.body.email
-  }).exec((err,user) => {
-    if(err){
-      res.status(500).send(err);
-    }
-
-    if(user){
-      res.status(200).send(user);
-    } 
-  })
-};
 
 export const logout = async (req, res) => {
   User.findOneAndUpdate(
@@ -27,11 +8,11 @@ export const logout = async (req, res) => {
     { sessionToken: "" }
   ).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      return res.status(500).send({ message: err });
     }
 
     if (user) {
-      res.status(200).send("Successfully logged out");
+      return res.status(200).send("Successfully logged out");
     }
   })
 };
@@ -44,7 +25,6 @@ export const registerUser = async (req, res) => {
   let token = jwt.sign({ email: req.body.email }, process.env.PASS, {
     expiresIn: 86400
   });
-  checkDuplicateEmail(req,res);
   const newUser = await User.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -61,31 +41,25 @@ export const registerUser = async (req, res) => {
 * and saves that token to the user schema.
 */
 export const loginUser = async (req, res) => {
-  User.findOne({
+  const user = await User.findOne({
     email: req.body.email
-  }).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-    }
+  })
+  if (!user) {
+    res.status(404).send({ message: "Email Not found." });
+  }
+  const originalPass = CryptoJS.AES.decrypt(user.passwordHash, process.env.PASS).toString(CryptoJS.enc.Utf8);
+  if (originalPass !== req.body.passwordHash) {
+    res.status(401).send({ message: "Incorrect Password" });
+  }
 
-    if (!user) {
-      res.status(404).send({ message: "Email Not found." });
-    }
+  let token = jwt.sign({ email: user.email }, process.env.PASS, {
+    expiresIn: 86400 // 24 hours
+  });
 
-    let originalPassword = CryptoJS.AES.decrypt(user.passwordHash, process.env.PASS).toString();
-
-    if (originalPassword !== req.body.passwordHash) {
-      res.status(401).send({ message: "Incorrect Password" });
-    }
-
-    let token = jwt.sign({ email: user.email }, process.env.PASS, {
-      expiresIn: 86400 // 24 hours
-    });
-
-    res.status(200).send({
-      email: user.email,
-      sessionToken: token
-    });
+  res.status(200).send({
+    email: user.email,
+    sessionToken: token,
+    message: "Successfully logged in"
   });
 };
 
