@@ -1,5 +1,6 @@
 import axios from "axios";
-import { loginFailure, loginStart, loginSuccess } from "./authActions";
+import { loginFailure, loginStart, loginSuccess } from "./login/loginActions";
+import { signupFailure, signupStart, signupSuccess } from "./signup/signupActions";
 
 export const login = async (user, dispatch) => {
   dispatch(loginStart());
@@ -19,15 +20,5 @@ export const signup = async (user, dispatch) => {
       dispatch(signupSuccess(response.data));
     } catch (err) {
       dispatch(signupFailure());
-    }
-  };
-
-export const logout= async (user, dispatch) => {
-    dispatch(logoutStart());
-    try {
-      const response = await axios.post("user/logout", user);
-      dispatch(logoutSuccess(response.data));
-    } catch (err) {
-      dispatch(logoutFailure());
     }
   };

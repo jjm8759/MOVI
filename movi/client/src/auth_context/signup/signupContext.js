@@ -1,4 +1,4 @@
-import reducer from "./authReducer";
+import reducer from "./signupReducer";
 import { createContext, useEffect, useReducer } from "react";
 
 const INITIAL_STATE = {
@@ -7,9 +7,9 @@ const INITIAL_STATE = {
   error: false,
 };
 
-export const AuthContext = createContext(INITIAL_STATE);
+export const signupContext = createContext(INITIAL_STATE);
 
-export const AuthContextProvider = ({ children }) => {
+export const signupContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [state.user]);
 
   return (
-    <authContext.Provider
+    <signupContext.Provider
       value={{
         user: state.user,
         isFetching: state.isFetching,
@@ -26,6 +26,6 @@ export const AuthContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </authContext.Provider>
+    </signupContext.Provider>
   );
 };
