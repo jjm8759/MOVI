@@ -4,7 +4,7 @@ import { registerUser, loginUser, logout} from '../actions/userActions.js';
 
 const router = express.Router(); // Get access to express router
 
-router.put("/logout", (req,res) => logout(req,res));
+router.get("/logout", (req,res) => logout(req,res));
 
 router.post("/signup", checkDuplicateEmail,  (req,res) => registerUser(req,res));
 
