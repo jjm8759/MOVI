@@ -1,4 +1,4 @@
-export default function loginReducer(state, action){
+const authReducer = (state, action) => {
     switch (action.type) {
       case "LOGIN_START":
         return {
@@ -28,3 +28,5 @@ export default function loginReducer(state, action){
         return { ...state };
     }
   };
+  
+  export default authReducer;
