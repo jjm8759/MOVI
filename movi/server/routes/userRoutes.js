@@ -1,9 +1,13 @@
 import express from 'express';
-import {signUpPage, userByEmail} from '../actions/userActions.js'
+import checkDuplicateEmail from "../middlewares/verifyUser.js";
+import { registerUser, loginUser, logout} from '../actions/userActions.js';
+
 const router = express.Router(); // Get access to express router
 
-router.get("/signUpPage", (req,res) => signUpPage(req,res));
+router.get("/logout", (req,res) => logout(req,res));
 
-router.get("/email",  (req,res) => userByEmail(req,res) );
+router.post("/signup", checkDuplicateEmail,  (req,res) => registerUser(req,res));
+
+router.post("/login",(req,res) =>  loginUser(req,res));
 
 export default router;

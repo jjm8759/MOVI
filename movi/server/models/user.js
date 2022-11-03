@@ -25,7 +25,7 @@ const userSchema = new Schema({
     },
     sessionToken: {
         type: String,
-        default: null
+        required: true
     },
     watchModes: {
         type: [String],
