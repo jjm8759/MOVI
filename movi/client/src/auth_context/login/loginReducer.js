@@ -1,4 +1,4 @@
-export default function authReducer(state, action){
+export default function loginReducer(state, action){
     switch (action.type) {
       case "LOGIN_START":
         return {

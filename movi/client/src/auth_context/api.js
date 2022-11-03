@@ -13,21 +13,21 @@ export const login = async (user, dispatch) => {
 
 
 export const signup = async (user, dispatch) => {
-    dispatch(loginStart());
+    dispatch(signupStart());
     try {
       const response = await axios.post("user/signin", user);
-      dispatch(loginSuccess(response.data));
+      dispatch(signupSuccess(response.data));
     } catch (err) {
-      dispatch(loginFailure());
+      dispatch(signupFailure());
     }
   };
 
 export const logout= async (user, dispatch) => {
-    dispatch(loginStart());
+    dispatch(logoutStart());
     try {
       const response = await axios.post("user/logout", user);
-      dispatch(loginSuccess(response.data));
+      dispatch(logoutSuccess(response.data));
     } catch (err) {
-      dispatch(loginFailure());
+      dispatch(logoutFailure());
     }
   };
