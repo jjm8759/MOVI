@@ -2,7 +2,7 @@ import exApiActions from "../externalApi/actions.js";
 import WatchedTitle from '../models/watchedTitle.js';
 import RecommendedTitle from '../models/recommendedTitle.js';
 import User from '../models/user.js';
-import { fetchTitleById } from "./titleActions";
+import { fetchTitleById } from "./titleActions.js";
 import Title from "../models/title.js";
 
 // GET request logic - (R)ead in CRUD
