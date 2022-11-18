@@ -1,7 +1,7 @@
 import useFetchData from "./authCalls";
 import React from "react";
 
-const Login = () => {
+const Register = () => {
   const {
     data,
     loading,
@@ -9,16 +9,20 @@ const Login = () => {
 
   return (
     <div>
-  <h1>Log In To MOVI</h1>
+  <h1>Register To MOVI</h1>
     {loading && <div>Loading</div>}
     {!loading && (
       <div>
         <form>
+          <label>First Name:</label>
+          <input type="text" placeholder="First Name"></input>
+          <label>Last Name:</label>
+          <input type="text" placeholder="Last Name"></input>
           <label>Email:</label>
           <input type="text" placeholder="Email"></input>
           <label>Password:</label>
           <input type="text" placeholder="Password"></input>
-          <button type="button">Log In</button>
+          <button type="button">Register</button>
         </form>
       </div>
     )}
@@ -27,4 +31,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default Register;
