@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useFetchData from "./authCalls";
+import React from "react";
 
+const Login = () => {
+  const {
+    data,
+    loading,
+  } = useFetchData();
 
-const [firstName, setFirstName] = useState("");
-const [lastName, setLastName] = useState("");
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("")
-
-useEffect(() => {
-  fetch("http://localhost:8000/user/login")
-    .then((res) => res.json())
-    .then((data) => setEmail(data.email));
-}, []);
-
-function getUser() {
-  axios.get("http://localhost:5000/", { crossdomain: true }).then(response => {
-    setFirstName(response.data.firstName);
-    setLastName(response.data.lastName);
-    setEmail(response.data.email);
-    setPassword(response.data.password);
-  });
+  return (
+    <div>
+    {loading && <div>Loading</div>}
+    {!loading && (
+      <div>
+        <h2>Grabbing user data</h2>
+        {data.map(item => (<span>{item.firstName}</span> ,
+        <span>{item.lastName}</span>,
+        <span>{item.email}</span>,
+        <span>{item.password}</span>
+        ))}
+      </div>
+    )}
+    </div>
+  )
 }
+
+export default Login;
