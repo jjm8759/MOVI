@@ -4,6 +4,24 @@ import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
 
 /**
+ * Gets user based on email provided if that user doesnt exits
+ * @return null
+ */
+export const getUser = async(req,res) => {
+  User.findOne({email: req.body.email}, (err,user) => {
+    if(err){
+      return res.status(500).send(err);
+    }
+    if(user){
+      return res.status(200).send(user);
+    }
+
+    if(!user){
+      return res.status(400).send({message: "User does not exist"});
+    }
+  })
+}
+/**
  * Logs the user out but finding their account based off email provided in request body and sets their session token to an empty 
  * string.
  */
