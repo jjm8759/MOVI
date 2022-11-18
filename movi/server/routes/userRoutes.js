@@ -8,7 +8,7 @@ router.get("/logout", (req,res) => logout(req,res));
 
 router.post("/signup", checkDuplicateEmail,  (req,res) => registerUser(req,res));
 
-router.post("/login",(req,res) =>  loginUser(req,res));
+router.put("/login",(req,res) =>  loginUser(req,res));
 
 router.get("/email", (req,res) => getUser(req,res));
 
