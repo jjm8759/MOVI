@@ -1,34 +1,51 @@
-import useFetchData from "./authCalls";
-import React, { Form } from "react";
 
+import React, { useState, useEffect } from 'react';
+import api from '../../apiCall.js'
 const Login = () => {
-  const {
-    data,
-    loading,
-  } = useFetchData();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
 
-  return (
-    <div>
-      <h1>Log In To MOVI</h1>
-      {loading && <div>Loading</div>}
-      {!loading && (
-        <div>
-          <Form>
-            <Form.field>
-              <label>Email:</label>
-              <input type="text" placeholder="Email"></input>
-            </Form.field>
-            <Form.field>
-              <label>Password:</label>
-              <input type="text" placeholder="Password"></input>
-            </Form.field>
-            <button type="button">Log In</button>
-          </Form>
-        </div>
-      )}
-
-    </div>
-  )
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      api.put('/user/login', {
+        email,
+        password,
+      })
+        .then((res) => {
+          setUserData(res.data);
+          alert("Made");
+        })
+        .catch((err) => {
+          setError(err.message);
+        });
+      setError(null);
+    }
+  }
+    return (
+      <div>
+        <h1>Login to MOVI</h1>
+        <form onSubmit={handleSubmit}>
+          {error && <p>{error}</p>}
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit">Login</button>
+          {userData && <p>Logged in successfully</p>}
+        </form>
+      </div>
+    );
+  };
 
 export default Login;
