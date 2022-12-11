@@ -11,7 +11,7 @@ export const getRecommended = async (req,res) => {
     let { userEmail } = req.params;
     let user = await User.findOne({userEmail: userEmail});
 
-    const numRecommendations = 10; // user should have 10 recommended titles (hardcoded test value for now)
+    let numRecommendations = 10; // user should have 10 recommended titles (hardcoded test value for now)
     let recommendedTitles = await RecommendedTitle.find({user: user._id});
     // If the user already has enough recommendations generated, send them in the response
     if (recommendedTitles.length >= numRecommendations) {

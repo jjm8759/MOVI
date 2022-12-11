@@ -1,22 +1,52 @@
+
+import Title from '../models/title.js';
+import User from '../models/user.js';
+import WatchedTitle from '../models/watchedTitle.js';
+
 // GET request logic - (R)ead in CRUD
-export const getWatched = async (req,res) => {
-    res.send('This is the GET response for the localhost:5000/watched route...');
+export const getWatched = async (req, res) => {
+    try {
+        const watched = await WatchedTitle.find({email:req.body.email});
+        return res.status(200).send(watched);
+    } catch (err) {
+        return res.status(500);
+    }
 }
 
+/**
+ * Generates a watched title using the users email and an ID from the titles database.
+ * @param {*} req User email and title id
+ * @param {*} res 
+ * @returns watched title data
+ */
 export const postWatched = async (req, res) => {
-    res.send('This is the POST response for the localhost:5000/watched route...');
-}
+    try {
+        const watched = await WatchedTitle.find({email:req.body.email});
+        if(watched){
+            return res.status(409).send('Title already watched');
+        }
+        const newWatched = await WatchedTitle.create({
+            user: await User.findOne({ email: req.body.email }),
+            title: await Title.findOne({ watchmodeId: req.body.watchmodeId }),
+        });
+        return res.status(200).send(newWatched);
 
-export const putWatched = async (req, res) => {
-    res.send('This is the PUT response for the localhost:5000/watched route...');
-}
+    } catch (err) {
+        return res.status(500)
+    }
 
+
+}
+/**
+ * Deletes singular watched title using it's watchmode id
+ * @param {*} req watched title
+ * @returns deleted title
+ */
 export const deleteWatched = async (req, res) => {
-    res.send('This is the DELETE response for the localhost:5000/watched route...');
+    try {
+        const watched = await WatchedTitle.findOneAndRemove(req.body.watchmodeId);
+        return res.status(200).send(watched);
+    } catch (err) {
+        return res.status(500);
+    }
 }
-
-//User needs to be able to remove a watched title
-//MANDATORY 
-///GET (Return the list of watched titles for user, takes in a user)
-//PUT (Adds a new title to the list of watched titles)
-//DELETE (Removes title from the users watched list)

@@ -2,7 +2,6 @@ import React from 'react';
 import { Container } from '@mui/system';
 import { Button } from '@mui/material';
 
-
 function Discover() {
   return ( 
    
@@ -24,7 +23,6 @@ function Discover() {
             marginTop: '5px',
            
           }}>
-       
         </div>  
         <div
           style = {{
