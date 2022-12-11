@@ -1,6 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
-import api from '../../apiCall.js'
+import React, { useState } from 'react';
+import api from '../../apiCall.js';
+import './Login.scss';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +16,6 @@ const Login = () => {
       })
         .then((res) => {
           setUserData(res.data);
-          alert("Made");
         })
         .catch((err) => {
           setError(err.message);
@@ -24,28 +23,28 @@ const Login = () => {
       setError(null);
     }
   }
-    return (
-      <div>
-        <h1>Login to MOVI</h1>
-        <form onSubmit={handleSubmit}>
+  return (
+      <div className='main'>
+        <h1 className='header'>Log In To MOVI</h1>
+        <form className='form' onSubmit={handleSubmit}>
           {error && <p>{error}</p>}
-          <input
+          <input class="form__input"
             type="text"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            type="text"
+          <input class="form__input"
+            type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Login</button>
+          <button className='button' type="submit">Login</button>
           {userData && <p>Logged in successfully</p>}
         </form>
       </div>
-    );
-  };
+  );
+};
 
 export default Login;
