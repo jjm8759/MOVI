@@ -21,10 +21,6 @@ export const getWatched = async (req, res) => {
  */
 export const postWatched = async (req, res) => {
     try {
-        const watched = await WatchedTitle.find({email:req.body.email});
-        if(watched){
-            return res.status(409).send('Title already watched');
-        }
         const newWatched = await WatchedTitle.create({
             user: await User.findOne({ email: req.body.email }),
             title: await Title.findOne({ watchmodeId: req.body.watchmodeId }),
