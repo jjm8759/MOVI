@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import api from '../../apiCall.js';
 import './Register.scss';
+import {useNavigate} from "react-router-dom"
+
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -11,7 +14,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password) {
+    if (email && password && firstName && lastName) {
       api.post('/user/signup', {
         email,
         password,
@@ -58,7 +61,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button className='button' type='submit'>Register</button>
-          {userData && <p>Registered successfully</p>}
+          {userData && <p>Registered successfully</p> && navigate('/discover')}
         </form>
       </div>
   );

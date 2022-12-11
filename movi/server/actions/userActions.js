@@ -17,7 +17,7 @@ export const getUser = async(req,res) => {
     }
 
     if(!user){
-      return res.status(400);
+      return res.status(400, {message: 'User does not exist'});
     }
   })
 }
@@ -28,7 +28,7 @@ export const getUser = async(req,res) => {
 export const logout = async (req, res) => {
   User.findOneAndUpdate({email: req.body.email}, { sessionToken: ''}, (err, user) => {
     if (err) {
-      return res.status(500);
+      res.status(500);
     }
     return res.status(200).send({
       message: 'Logout successfull',
@@ -70,11 +70,11 @@ export const loginUser = async (req, res) => {
 
   try{
     if (!user) {
-      return res.status(404).send('User does not exist');
+      res.status(404 , { message: 'Email Not found.' });
     }
     const originalPass = CryptoJS.AES.decrypt(user.passwordHash, process.env.PASS).toString(CryptoJS.enc.Utf8);
     if (originalPass !== req.body.passwordHash) {
-      return res.status(401).send('Incorrect Password');
+      res.status(401, { message: 'Incorrect Password' });
     }
   }catch(err){
     console.log(err);
@@ -84,4 +84,3 @@ export const loginUser = async (req, res) => {
     message: 'Successfully logged in'
   });
 };
-
