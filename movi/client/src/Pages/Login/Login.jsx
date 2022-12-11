@@ -28,13 +28,13 @@ const Login = () => {
         <h1 className='header'>Log In To MOVI</h1>
         <form className='form' onSubmit={handleSubmit}>
           {error && <p>{error}</p>}
-          <input class="form__input"
+          <input className="form__input"
             type="text"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input class="form__input"
+          <input className="form__input"
             type="password"
             placeholder="Password"
             value={password}

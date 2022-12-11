@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      api.put('/user/signup', {
+      api.post('/user/signup', {
         email,
         password,
         firstName,
@@ -33,31 +33,31 @@ const Login = () => {
         
         <form className='form' onSubmit={handleSubmit}>
           {error && <p>{error}</p>}
-          <input class="form__input"
-            type="text"
-            placeholder="First Name"
+          <input className='form__input'
+            type='text'
+            placeholder='First Name'
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
-          <input class="form__input"
-            type="text"
-            placeholder="Last Name"
+          <input className='form__input'
+            type='text'
+            placeholder='Last Name'
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
-          <input class="form__input"
-            type="text"
-            placeholder="Email"
+          <input class='form__input'
+            type='text'
+            placeholder='Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input class="form__input"
-            type="password"
-            placeholder="Password"
+          <input class='form__input'
+            type='password'
+            placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className='button' type="submit">Register</button>
+          <button className='button' type='submit'>Register</button>
           {userData && <p>Registered successfully</p>}
         </form>
       </div>
