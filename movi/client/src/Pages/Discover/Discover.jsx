@@ -1,15 +1,12 @@
 import React from 'react';
 import { Container } from '@mui/system';
 import { Button } from '@mui/material';
-import SearchBar from './components/SearchBar';
-import { Helmet } from 'react-helmet';
 
 
 function Discover() {
   return ( 
    
   <div>
-    <Helmet bodyAttributes={{style: 'background-color : #50dcee'}}/>
   <div
       style ={{
         backgroundColor: '#50dcee',
@@ -27,7 +24,7 @@ function Discover() {
             marginTop: '5px',
            
           }}>
-        <SearchBar/>
+       
         </div>  
         <div
           style = {{

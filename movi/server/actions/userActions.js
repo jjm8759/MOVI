@@ -1,20 +1,38 @@
-import User from "../models/user.js";
+import User from '../models/user.js';
 
-import CryptoJS from "crypto-js";
-import jwt from "jsonwebtoken";
+import CryptoJS from 'crypto-js';
+import jwt from 'jsonwebtoken';
 
+/**
+ * Gets user based on email provided if that user doesnt exits
+ * @return null
+ */
+export const getUser = async(req,res) => {
+  User.findOne({email: req.body.email}, (err,user) => {
+    if(err){
+      return res.status(500);
+    }
+    if(user){
+      return res.status(200).send(user);
+    }
+
+    if(!user){
+      return res.status(400, {message: 'User does not exist'});
+    }
+  })
+}
 /**
  * Logs the user out but finding their account based off email provided in request body and sets their session token to an empty 
  * string.
  */
 export const logout = async (req, res) => {
-  User.findOneAndUpdate({email: req.body.email}, { sessionToken: ""}, (err, user) => {
+  User.findOneAndUpdate({email: req.body.email}, { sessionToken: ''}, (err, user) => {
     if (err) {
-      return res.status(500).send(err);
+      res.status(500);
     }
     return res.status(200).send({
-      message: "Logout successfull",
-      sessionToken: ""
+      message: 'Logout successfull',
+      sessionToken: ''
     });
   });
 };
@@ -33,7 +51,7 @@ export const registerUser = async (req, res) => {
     email: req.body.email,
     passwordHash: CryptoJS.AES.encrypt(req.body.passwordHash, process.env.PASS).toString(),
     sessionToken: token
-  }).then(res.status(201).send("Registered Successfully"));
+  }).then(res.status(201).send('Registered Successfully'));
   
 };
 
@@ -50,18 +68,19 @@ export const loginUser = async (req, res) => {
 
   const user = await User.findOneAndUpdate({email: req.body.email}, {sessionToken: token});
 
-  if (!user) {
-    res.status(404).send({ message: "Email Not found." });
+  try{
+    if (!user) {
+      res.status(404 , { message: 'Email Not found.' });
+    }
+    const originalPass = CryptoJS.AES.decrypt(user.passwordHash, process.env.PASS).toString(CryptoJS.enc.Utf8);
+    if (originalPass !== req.body.passwordHash) {
+      res.status(401, { message: 'Incorrect Password' });
+    }
+  }catch(err){
+    console.log(err);
   }
-  const originalPass = CryptoJS.AES.decrypt(user.passwordHash, process.env.PASS).toString(CryptoJS.enc.Utf8);
-  if (originalPass !== req.body.passwordHash) {
-    res.status(401).send({ message: "Incorrect Password" });
-  }
-
   res.status(200).send({
-    email: user.email,
     sessionToken: token,
-    message: "Successfully logged in"
+    message: 'Successfully logged in'
   });
 };
-
