@@ -1,39 +1,23 @@
 import React from 'react';
 import { Container } from '@mui/system';
-import { Button } from '@mui/material';
+import Header from './Header';
+import { Helmet } from './react-helmet';
+
 
 function Discover() {
   return ( 
    
   <div>
-  <div
-      style ={{
-        backgroundColor: '#50dcee',
-      }}> 
-      <div>
-        <Container maxWidth = 'xxl'
-        style={{
-          backgroundColor: '#d1f6fa',
-          display: 'block',
-          padding: '50px'
-        }}>
-        <div
-          style = {{
-            float: 'left',
-            marginTop: '5px',
-           
-          }}>
-        </div>  
-        <div
-          style = {{
-            float: 'right',
-            
-          }}>
-          <Button> Movies </Button> <Button> TV Shows </Button>
-                <Button> Watch List </Button> <Button> My Account </Button>
-        </div>
-      </Container>
-    </div> 
+       <Helmet bodyAttributes={{style: 'background-color : #50dcee'}}/>
+      <div >
+        <Header/>
+      </div> 
+  
+      <div className = "PageLabelStyle">
+        <Container>
+          <p className = "PageLabelParagraph"> RECOMMENDED </p>
+        </Container>
+      </div>
   
     <div >
     <Container maxWidth = "xxl"
@@ -163,8 +147,6 @@ function Discover() {
     </Container>
   </div>
   </div>
-  </div>
-  
   );
 }
 
