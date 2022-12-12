@@ -3,6 +3,7 @@ import { Container } from '@mui/system';
 import { Button } from '@mui/material';
 import SearchBar from './components/SearchBar';
 import { Helmet } from 'react-helmet';
+import Header from './Components/Header/';
 
 
 function TVShows() {
