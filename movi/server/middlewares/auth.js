@@ -6,15 +6,21 @@ import jwt from 'jsonwebtoken';
 /**
  * Verifies the json web token using a password held in the repo's .env
  */
-function verifyToken (req, res, next){
-    jwt.verify(req.body.token, process.env.PASS, (err, user) => {
+function verifyToken(req, res, next) {
+  const token = req.body.sessionToken || req.headers["x-access-token"];
+  if (!token) {
+    return res.status(400).send('No session found');
+  }
+  try {
+    jwt.verify(req.body.sessionToken, process.env.PASS, (err, user) => {
       if (err) {
         res.status(403).json("Token is not valid!");
-      } else {
-        res.status(401).json("You are not authenticated!");
       }
       req.user = user;
       next();
-    })
+    });
+  } catch (err) {
+    return res.status(500).send(err);
   }
-  export default verifyToken;
+}
+export default verifyToken;

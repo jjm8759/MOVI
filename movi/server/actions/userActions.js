@@ -62,12 +62,7 @@ export const registerUser = async (req, res) => {
 */
 export const loginUser = async (req, res) => {
 
-  let token = jwt.sign({ email: req.body.email }, process.env.PASS, {
-    expiresIn: 86400 // 24 hours
-  });
-
   const user = await User.findOneAndUpdate({email: req.body.email}, {sessionToken: token});
-
   try{
     if (!user) {
       res.status(404 , { message: 'Email Not found.' });
@@ -79,6 +74,9 @@ export const loginUser = async (req, res) => {
   }catch(err){
     console.log(err);
   }
+  let token = jwt.sign({ email: req.body.email }, process.env.PASS, {
+    expiresIn: 86400 // 24 hours
+  });
   res.status(200).send({
     sessionToken: token,
     message: 'Successfully logged in'

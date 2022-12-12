@@ -1,4 +1,5 @@
 import express from 'express';
+import verifyToken from '../middlewares/auth.js';
 import checkDuplicateEmail from "../middlewares/verifyUser.js";
 import { registerUser, loginUser, logout, getUser} from '../actions/userActions.js';
 
@@ -9,6 +10,6 @@ router.post("/signup", checkDuplicateEmail,  (req,res) => registerUser(req,res))
 
 router.put("/login",(req,res) =>  loginUser(req,res));
 
-router.get("/email", (req,res) => getUser(req,res));
+router.get("/email", verifyToken,  (req,res) => getUser(req,res));
 
 export default router;
