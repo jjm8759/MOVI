@@ -1,0 +1,30 @@
+.HeaderStyle {
+    margin-top: 0;
+    margin-bottom: 0;
+    display: flex;
+    background-color: #d1f6fa;
+    height: 100px;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.LeftStyle {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+    width: 50%;
+    align-items: flex-end;
+
+}
+
+.RightStyle {
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+    align-items: flex-end;
+}
+
+.DivStyle {
+    width: 100%;
+
+}
