@@ -1,0 +1,29 @@
+.PageLabelStyle {
+    width: 90%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px ;
+}
+
+.PageLabelParagraph {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.DivStyle {
+    width: 100%;
+    display: flex;
+}
