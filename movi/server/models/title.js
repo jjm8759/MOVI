@@ -39,7 +39,7 @@ const titleSchema = new Schema({
     },
     year: {
         type: Number,
-        required: true
+        default: null
     },
     genre_names: {
         type: [String],

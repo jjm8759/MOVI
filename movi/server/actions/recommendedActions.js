@@ -5,9 +5,8 @@ import User from '../models/user.js';
 import { fetchTitleById } from "./titleActions.js";
 import Title from "../models/title.js";
 
-// GET request logic - (R)ead in CRUD
+// This is the GET response for the localhost:5000/recommended route
 export const getRecommended = async (req,res) => {
-    //res.send('This is the GET response for the localhost:5000/recommended route...');
     let { userEmail } = req.params;
     let user = await User.findOne({userEmail: userEmail});
     let numRecommendations = 10; // user should have 10 recommended titles (hardcoded test value for now)
@@ -88,6 +87,6 @@ export const getRecommended = async (req,res) => {
     recommendedTitles = await Promise.all(recommendedTitles.map(async (recommended) => {
         return await Title.findById(recommended.title);
     }));
-    console.log(recommendedTitles)
+    recommendedTitles = recommendedTitles.slice(0, numRecommendations);
     return res.status(200).send(recommendedTitles);
 }
